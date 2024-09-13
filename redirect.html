@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Redirect</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus acknowledgement</title>
 </head>
-<body onload="document.getElementById('postForm').submit();">
-  <form id="postForm" action="https://prod-179.westus.logic.azure.com:443/workflows/9f02f6f333ff486db463f91c81bfa163/triggers/manual/paths/invoke?api-version=2016-06-01" method="POST">
-    <input type="hidden" name="Authorization" value="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ikg5bmo1QU9Tc3dNcGhnMVNGeDdqYVYtbEI5dyIsImtpZCI6Ikg5bmo1QU9Tc3dNcGhnMVNGeDdqYVYtbEI5dyJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZWIwNjk4NWQtMDZjYS00YTE3LTgxZGEtNjI5YWI5OWY2NTA1LyIsImlhdCI6MTcyNjE0MzY4MCwibmJmIjoxNzI2MTQzNjgwLCJleHAiOjE3MjYxNDc1ODAsImFpbyI6IkUyZGdZUGpyYVdBbVlLVjFRdHpXS1ZLZ1JFSUpBQT09IiwiYXBwaWQiOiJiOGMyMjUyNS05ZjI4LTQ5ZGQtYTdhZS02ZTYyZTgzZGRhYzMiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9lYjA2OTg1ZC0wNmNhLTRhMTctODFkYS02MjlhYjk5ZjY1MDUvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiJmM2YxODY3ZS0xMjJmLTQ5ZWEtYjY4Ni1jMDk0N2YzOTYxYWMiLCJyaCI6IjAuQVE0QVhaZ0c2OG9HRjBxQjJtS2F1WjlsQlVaSWYza0F1dGRQdWtQYXdmajJNQk1PQUFBLiIsInN1YiI6ImYzZjE4NjdlLTEyMmYtNDllYS1iNjg2LWMwOTQ3ZjM5NjFhYyIsInRpZCI6ImViMDY5ODVkLTA2Y2EtNGExNy04MWRhLTYyOWFiOTlmNjUwNSIsInV0aSI6InVrODlhZ0R0LWt1ZzlJWng4T0hXQUEiLCJ2ZXIiOiIxLjAiLCJ4bXNfaWRyZWwiOiI3IDYiLCJ4bXNfdGNkdCI6MTQwNjcyODA1MH0.WlUw2y4p5p3wCdibA5BGuwhpDoRoBMW-2eTIK2OOYgfoWC9ubLxEN-9eOvlmU-K05k1cAPEGCh2-NCmMR-GLnWtGqwW7M9iNtTamidgYA81_oxw30ESveI95vfIbMWW9Vo27sEXS1Lqk310vAIL-sk54qB7Pqc8zC5ioBD2FDMdjv23fbSmOilbAFijiuxvxZMmKhXTgjgtRwmBG5GgiqOHftZEo1yXTgMGSrswfYatI09xElSvau1FB6M8iDRZ4Zx1Sl76ghfweiyzKUbkz7gvtNU7iCfmY-b2IDdVkLuEZ-0cX_El6j6FLbH3KH_A3UoHwQa-Lxs37HKZkPadZrQ
-">
-  </form>
-  <p>Redirecting...</p>
+<body>
+    <form action="https://prod-179.westus.logic.azure.com:443/workflows/9f02f6f333ff486db463f91c81bfa163/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YFDDKkoqV_7xVi4UCrtH4tLSQgU13kn47UkHndM-M4w" method="POST">
+        <input type="hidden" name="email" value="">
+        <button type="submit">Click here to acknowledge</button>
+    </form>
+    <script>
+        // Get the email parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        // Set the email value in the hidden input field
+        document.querySelector('input[name="email"]').value = email;
+    </script>
 </body>
 </html>
