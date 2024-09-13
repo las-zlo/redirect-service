@@ -78,7 +78,7 @@
                 return response.text(); // Use response.text() to handle non-JSON responses
             })
             .then(text => {
-                console.log('Response text:', text);
+                console.log('Raw response text:', text);
                 try {
                     const data = JSON.parse(text);
                     console.log('Success:', data);
