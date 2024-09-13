@@ -3,10 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bonus Acknowledgement</title>
+    <title>Bonus acknowledgement</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        #submitButton {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            padding: 15px 32px; /* Padding */
+            text-align: center; /* Centered text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Inline-block */
+            font-size: 16px; /* Font size */
+            margin: 4px 2px; /* Margin */
+            cursor: pointer; /* Pointer cursor on hover */
+            border: none; /* Remove border */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+        }
+        #submitButton:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+    </style>
 </head>
 <body>
-    <button id="submitButton">Click here to acknowledge your bonus</button>
+    <form id="detailsForm">
+        <input type="hidden" id="email" name="email" value="">
+        <input type="hidden" id="var1" name="var1" value="">
+        <input type="hidden" id="var2" name="var2" value="">
+        <button type="button" id="submitButton">Click here to acknowledge your bonus</button>
+    </form>
 
     <script>
         // Get the parameters from the URL
@@ -15,6 +48,16 @@
         const var1 = urlParams.get('var1');
         const var2 = urlParams.get('var2');
         const bearerToken = urlParams.get('token'); // Get the bearer token from the URL
+
+        console.log('Email:', email);
+        console.log('Var1:', var1);
+        console.log('Var2:', var2);
+        console.log('Bearer Token:', bearerToken);
+
+        // Set the values in the hidden input fields
+        document.getElementById('email').value = email;
+        document.getElementById('var1').value = var1;
+        document.getElementById('var2').value = var2;
 
         document.getElementById('submitButton').addEventListener('click', function() {
             fetch('https://prod-179.westus.logic.azure.com:443/workflows/9f02f6f333ff486db463f91c81bfa163/triggers/manual/paths/invoke?api-version=2016-06-01', {
@@ -29,7 +72,12 @@
                     var2: var2
                 })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
             .then(data => {
                 console.log('Success:', data);
                 alert('Details sent successfully!');
@@ -42,4 +90,3 @@
     </script>
 </body>
 </html>
-
