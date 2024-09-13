@@ -3,19 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bonus acknowledgement</title>
+    <title>Bonus Acknowledgement</title>
 </head>
 <body>
-    <form action="https://prod-179.westus.logic.azure.com:443/workflows/9f02f6f333ff486db463f91c81bfa163/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YFDDKkoqV_7xVi4UCrtH4tLSQgU13kn47UkHndM-M4w" method="POST">
-        <input type="hidden" name="email" value="">
-        <button type="submit">Click here to acknowledge</button>
-    </form>
+    <button id="submitButton">Click here to acknowledge your bonus</button>
+
     <script>
-        // Get the email parameter from the URL
+        // Get the parameters from the URL
         const urlParams = new URLSearchParams(window.location.search);
         const email = urlParams.get('email');
-        // Set the email value in the hidden input field
-        document.querySelector('input[name="email"]').value = email;
+        const var1 = urlParams.get('var1');
+        const var2 = urlParams.get('var2');
+        const bearerToken = urlParams.get('token'); // Get the bearer token from the URL
+
+        document.getElementById('submitButton').addEventListener('click', function() {
+            fetch('https://prod-179.westus.logic.azure.com:443/workflows/9f02f6f333ff486db463f91c81bfa163/triggers/manual/paths/invoke?api-version=2016-06-01', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${bearerToken}`
+                },
+                body: JSON.stringify({
+                    email: email,
+                    var1: var1,
+                    var2: var2
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Details sent successfully!');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Failed to send details.');
+            });
+        });
     </script>
 </body>
 </html>
+
