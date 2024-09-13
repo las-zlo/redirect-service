@@ -79,14 +79,19 @@
             })
             .then(text => {
                 console.log('Raw response text:', text);
-                try {
-                    const data = JSON.parse(text);
-                    console.log('Success:', data);
-                    alert('Details sent successfully!');
-                } catch (error) {
-                    console.error('Error parsing JSON:', error);
-                    console.error('Response text:', text);
-                    alert('Failed to send details. Error parsing response.');
+                if (text) {
+                    try {
+                        const data = JSON.parse(text);
+                        console.log('Success:', data);
+                        alert('Details sent successfully!');
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error);
+                        console.error('Response text:', text);
+                        alert('Failed to send details. Error parsing response.');
+                    }
+                } else {
+                    console.log('Empty response received.');
+                    alert('Details sent successfully, but no response received.');
                 }
             })
             .catch((error) => {
